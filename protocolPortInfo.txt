@@ -1,0 +1,7 @@
+Protocol: tcp, Port: 53
+Protocol: tcp, Port: 5432
+Protocol: tcp, Port: 33749
+Protocol: tcp, Port: 631
+Protocol: tcp, Port: 37259
+Protocol: tcp, Port: 35563
+Protocol: tcp6, Port: 631
