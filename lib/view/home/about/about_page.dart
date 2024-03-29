@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../model/data.dart';
+
 class AboutPage extends StatelessWidget {
   const AboutPage({Key? key}) : super(key: key);
   static const routeName = "AboutPage";
@@ -39,24 +41,24 @@ class AboutPage extends StatelessWidget {
         shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           scrollDirection: Axis.horizontal,
-          itemBuilder: (context,index)=>infoPartBody(context),
+          itemBuilder: (context,index)=>infoPartBody(context,dataName[index],dataImage[index]),
           separatorBuilder: (context,index)=>const SizedBox(width: 20,), itemCount: 4),
     );
   }
 
-  Widget infoPartBody(BuildContext context) {
+  Widget infoPartBody(BuildContext context,String name,String path) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
 
 
-         Image.asset("assets/images/me.jpg",fit: BoxFit.contain,
+         Image.asset(path,fit: BoxFit.cover,
          width: 200,height: 200,),
 
          TextButton(onPressed: (){
 
         }
-        , child:  Text("Abdelrhman Ragab",
+        , child:  Text(name,
            style: TextStyle(
              color: Theme.of(context).secondaryHeaderColor,
              fontSize: 20
