@@ -8,15 +8,17 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isMobile=MediaQuery.of(context).size.width<700;
+    print(isMobile);
     return Scaffold(
         appBar: AppBar(
-          title: const Text("about us "),
+          title:  const Text("about us "),
           centerTitle: true,
         ),
-        body: buildBody(context));
+        body: buildBody(context,isMobile));
   }
 
-  Widget buildBody(BuildContext context) {
+  Widget buildBody(BuildContext context,bool isMobile) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -26,7 +28,7 @@ class AboutPage extends StatelessWidget {
           children: [
             aboutUsPart(context),
             const SizedBox(height: 25,),
-            infoPart(context),
+            isMobile?infoPartMobile(context):infoPartWeb(context),
             const SizedBox(height: 25,),
             objectivePart(context)
           ],
@@ -34,7 +36,7 @@ class AboutPage extends StatelessWidget {
       ),
     );
   }
-  Widget infoPart(BuildContext context){
+  Widget infoPartWeb(BuildContext context){
     return SizedBox(
       height: 250,
       child: ListView.separated(
@@ -42,7 +44,18 @@ class AboutPage extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           scrollDirection: Axis.horizontal,
           itemBuilder: (context,index)=>infoPartBody(context,dataName[index],dataImage[index]),
-          separatorBuilder: (context,index)=>const SizedBox(width: 20,), itemCount: 4),
+          separatorBuilder: (context,index)=>const SizedBox(width: 50,), itemCount: 4),
+    );
+  }
+
+  Widget infoPartMobile(BuildContext context){
+    return SizedBox(
+      height: 1000,
+      child: ListView.separated(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context,index)=>infoPartBody(context,dataName[index],dataImage[index]),
+          separatorBuilder: (context,index)=>const SizedBox(height: 20,), itemCount: 4),
     );
   }
 

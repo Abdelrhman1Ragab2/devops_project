@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../controller/menu_provider.dart';
+import '../core/widget/custom_drawer.dart';
 import 'menu/menu_ui.dart';
 
 class DashBord extends StatelessWidget {
@@ -12,9 +13,13 @@ class DashBord extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isMobile=MediaQuery.of(context).size.width<=700;
+    print(MediaQuery.of(context).size.width);
     int currentIndex = Provider.of<MenuProvider>(context).menusSelectedIndex;
     return Scaffold(
-      body: buildBody(context,currentIndex),
+      body: isMobile?buildBodyMobile(context,currentIndex):buildBodyWeb(context,currentIndex),
+      appBar: isMobile?AppBar():null,
+      endDrawer: isMobile?const MyDrawer():null,
     );
   }
 
@@ -26,13 +31,17 @@ class DashBord extends StatelessWidget {
     return items;
   }
 
-  Widget buildBody(BuildContext context,int currentIndex) {
+  Widget buildBodyWeb(BuildContext context,int currentIndex) {
     return Row(
       children: [
          Expanded(flex: 1, child: menuBody()),
          Expanded(flex: 5, child: homeBody(context,currentIndex)),
       ],
     );
+  }
+  Widget buildBodyMobile(BuildContext context,int currentIndex) {
+    return
+          homeBody(context,currentIndex);
   }
 
   Widget menuBody() {

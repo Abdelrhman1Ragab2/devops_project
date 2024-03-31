@@ -22,7 +22,6 @@ class MenuUI extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          //Image.asset("assets/images/jenkins.png"),
           Expanded(child: menusBody(context))
         ],
       ),
