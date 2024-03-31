@@ -21,7 +21,7 @@ class DashBord extends StatelessWidget {
   List <BottomNavigationBarItem> bottomNavigationBarItemBody(BuildContext context){
     List <BottomNavigationBarItem> items=[];
     Provider.of<MenuProvider>(context).menus.forEach((element) {
-      items.add(BottomNavigationBarItem(icon:Icon(element.icon),label: element.title ));
+      items.add(BottomNavigationBarItem(icon:Image.asset(element.image),label: element.title ));
     });
     return items;
   }

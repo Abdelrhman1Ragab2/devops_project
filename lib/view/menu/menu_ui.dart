@@ -18,7 +18,7 @@ class MenuUI extends StatelessWidget {
   Widget buildBody(BuildContext context){
     return Container(
       height: double.infinity,
-      color: Theme.of(context).primaryColor,
+      color: Theme.of(context).primaryColor.withOpacity(0.9),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -43,9 +43,7 @@ class MenuUI extends StatelessWidget {
       margin: const EdgeInsets.all(4.0),
       child: ListTile(
         title:myText(menu.title,size: 18) ,
-        trailing: Icon(menu.icon,
-            color: index==Provider.of<MenuProvider>(context).menusSelectedIndex?Colors.black: Colors.white,
-        ),
+        trailing: Image.asset(menu.image),
         onTap: (){
           Provider.of<MenuProvider>(context,listen: false).changeMenuIndex(index);
         },

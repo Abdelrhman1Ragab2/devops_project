@@ -19,11 +19,6 @@ class Linux extends StatefulWidget {
 class _LinuxState extends State<Linux> {
 List<Connection>connections=[];
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-  @override
   Widget build(BuildContext context) {
 
     return Scaffold(

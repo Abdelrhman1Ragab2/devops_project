@@ -15,18 +15,19 @@ class MenuProvider with ChangeNotifier{
    notifyListeners();
   }
   List<MenuModel> menus=[
-    MenuModel(title: "About", icon: Icons.summarize_outlined),
-    MenuModel(title: "Linux", icon: Icons.notes,),
-    MenuModel(title: "Jenkins", icon: Icons.task_alt,),
-    MenuModel(title: "Docker", icon: Icons.notes,),
-    MenuModel(title: "Kubernetes", icon: Icons.task_alt,),
-    MenuModel(title: "Agile", icon: Icons.summarize_outlined),
-    MenuModel(title: "AWS", icon: Icons.notes,),
-    MenuModel(title: "Ansible", icon: Icons.task_alt,),
-    MenuModel(title: "Terraform", icon: Icons.task_alt,),
+    MenuModel(title: "About", image: "assets/images/team.png"),
+    MenuModel(title: "Linux", image: "assets/images/linux.png",),
+    MenuModel(title: "Jenkins", image: "assets/images/jenkins1.png",),
+    MenuModel(title: "Python", image: "assets/images/python.png",),
+    MenuModel(title: "Docker", image:"assets/images/docker.png"),
+    MenuModel(title: "Kubernetes", image: "assets/images/download.png"),
+    MenuModel(title: "Agile", image: "assets/images/agile.png"),
+    MenuModel(title: "AWS", image: "assets/images/aws.png"),
+    MenuModel(title: "Ansible", image: "assets/images/ansible.png"),
+    MenuModel(title: "Terraform", image: "assets/images/tera.png"),
   ];
 
-  List<Widget> screens=const[ AboutPage(),Linux(),Jenkins(),Services(),Services(),Services(),Services(),Services(),Services()];
+  List<Widget> screens=const[ AboutPage(),Linux(),Jenkins(),Services(),Services(),Services(),Services(),Services(),Services(),Services()];
 
 
 
