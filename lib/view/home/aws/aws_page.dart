@@ -14,21 +14,7 @@ class AWS extends StatefulWidget {
 }
 
 class _AWSState extends State<AWS> {
-  late List<User> users;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   initializeUsers();
-  // }
-  // Future<void> initializeUsers() async {
-  //   users = await Provider.of<ApiProvider>(context, listen: false).getAllUsers();
-  //   await Future.delayed(Duration(seconds: 3));
-  //   setState(() {
-  //
-  //     print("error is :${users.length}");
-  //   });
-  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,13 +32,23 @@ class _AWSState extends State<AWS> {
                 },
                 icon: Icon(
                   Icons.add,
-                ))
+                )),
+            IconButton(
+                onPressed: () {
+                  setState(() {
+
+                  });
+                },
+                icon: Icon(
+                  Icons.refresh,
+                )),
           ],
         ),
         body: buildBody(context));
   }
 
   Widget buildBody(BuildContext context) {
+    print("i will build");
     return FutureBuilder<List<User>>(
       future: Provider.of<ApiProvider>(context, listen: false).getAllUsers(),
       builder: (context, snapshot) {
@@ -74,21 +70,39 @@ class _AWSState extends State<AWS> {
 
   Widget allUserList(List<User> users) {
     return ListView.separated(
-        itemBuilder: (context, index) => userItem(users[index]),
+        itemBuilder: (context, index) => userItem(users[index],index),
         separatorBuilder: (context, index) => SizedBox(
               height: 15,
             ),
         itemCount: users.length);
   }
 
-  Widget userItem(User user) {
-    return Row(
-      children: [
-        Text(user.userId ?? "id"),
-        Text(user.userName ?? "name"),
-        Text(user.userEmail ?? "email"),
-        Text(user.userPhone ?? "phone")
-      ],
+  Widget userItem(User user,index) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      color: Colors.grey.shade400,
+      child: Row(
+        children: [
+          Expanded(flex:1,child: awsText(index==0?"Id":"${user.userId?.substring(0,5)}******" ?? "id")),
+          Expanded(flex:2,child: awsText(user.userName ?? "name")),
+          Expanded(flex:2,child: awsText(user.userEmail ?? "email")),
+          Expanded(flex:1,child: awsText(user.userPhone ?? "phone")),
+          index==0?const Expanded(flex:1,child: SizedBox()):Expanded(flex:1,child: IconButton(onPressed: ()async {
+            await Provider.of<ApiProvider>(context,listen: false).deleteUser(user.userId??"id" );
+            setState(() {
+
+            });
+          },icon:  Icon(Icons.delete,color: Theme.of(context).primaryColor,),))
+        ],
+      ),
+    );
+  }
+  Widget awsText(String info){
+    return Text(info,
+      style: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w700
+      ),
     );
   }
 }

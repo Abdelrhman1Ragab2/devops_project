@@ -3,6 +3,8 @@ import 'package:network/model/user.dart';
 import 'package:provider/provider.dart';
 
 import '../../controller/api-provider.dart';
+import 'package:uuid/uuid.dart';
+
 
 
 class AddUserDialog extends StatefulWidget {
@@ -36,7 +38,7 @@ class _AddUserDialogState extends State<AddUserDialog> {
   Widget buildBody(BuildContext context) {
     return Padding(
       padding:
-          const EdgeInsets.only(left: 150, right: 150, top: 50, bottom: 50),
+          const EdgeInsets.only(left: 50, right: 50, top: 50, bottom: 50),
       child: AlertDialog(
           backgroundColor: Theme.of(context).primaryColor,
           elevation: 20,
@@ -52,9 +54,9 @@ class _AddUserDialogState extends State<AddUserDialog> {
       MaterialButton(
         padding: const EdgeInsets.all(12.0),
         elevation: 20,
-        color: const Color.fromRGBO(204, 10, 10, 0.9019607843137255),
+        color: const Color.fromRGBO(224, 224, 224, 0.9019607843137255),
         onPressed: () async {
-          Provider.of<ApiProvider>(context,listen: false).addUser(User(userId: DateTime.now().toString(),
+          Provider.of<ApiProvider>(context,listen: false).addUser(User(userId: generateUniqueId(),
               userName: Provider.of<ApiProvider>(context,listen: false).nameController.text,
               userEmail: Provider.of<ApiProvider>(context, listen: false).emailController.text,
               userPhone: Provider.of<ApiProvider>(context,listen: false).phoneController.text));
@@ -63,8 +65,12 @@ class _AddUserDialogState extends State<AddUserDialog> {
 
         },
 
-        child: Text(
+        child: const Text(
           "save",
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w700
+          ),
         ),
       ),
       const SizedBox(
@@ -79,7 +85,12 @@ class _AddUserDialogState extends State<AddUserDialog> {
         },
         child: const Text(
           "Discard",
+          style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w700
+          ),
         ),
+
       ),
     ];
   }
@@ -112,10 +123,10 @@ class _AddUserDialogState extends State<AddUserDialog> {
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: TextFormField(
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.black),
           controller: Provider.of<ApiProvider>(context).emailController,
           decoration: const InputDecoration(
-            hintStyle: TextStyle(color: Colors.white),
+            hintStyle: TextStyle(color: Colors.black),
             hintText: "email",
           )),
     );
@@ -129,10 +140,10 @@ class _AddUserDialogState extends State<AddUserDialog> {
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: TextFormField(
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.black),
           controller: Provider.of<ApiProvider>(context).nameController,
           decoration: const InputDecoration(
-            hintStyle: TextStyle(color: Colors.white),
+            hintStyle: TextStyle(color: Colors.black),
             hintText: "name",
           )),
     );
@@ -147,10 +158,10 @@ class _AddUserDialogState extends State<AddUserDialog> {
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: TextFormField(
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.black),
           controller: Provider.of<ApiProvider>(context).phoneController,
           decoration: const InputDecoration(
-            hintStyle: TextStyle(color: Colors.white),
+            hintStyle: TextStyle(color: Colors.black),
             hintText: "phone",
           )),
     );
@@ -158,22 +169,8 @@ class _AddUserDialogState extends State<AddUserDialog> {
 
 
 
-  // Future<void> onSave(BuildContext context) async {
-  //   if (widget.forEditing) {
-  //     Provider.of<TaskProvider>(context, listen: false).updateTask(widget.task!.id);
-  //   } else {
-  //     await Provider.of<TaskProvider>(context, listen: false).crateTask();
-  //   }
-  // }
-
-  // doInitOperation(BuildContext context) async{
-  //   await Provider.of<TaskProvider>(context, listen: false).doEditingOperation(
-  //     name: widget.task!.name,
-  //     description: widget.task!.description,
-  //     status: widget.task!.status,
-  //     category: widget.task!.category,
-  //     myStartDate: widget.task!.startDate,
-  //     myEndDate: widget.task!.endDate,
-  //   );
-  // }
+}
+String generateUniqueId() {
+  var uuid = const Uuid();
+  return uuid.v4(); // Generates a version 4 (random) UUID
 }
