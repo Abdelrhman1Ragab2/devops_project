@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 
@@ -9,6 +8,7 @@ import '../core/widget/custom_drawer.dart';
 import 'menu/menu_ui.dart';
 
 class DashBord extends StatelessWidget {
+  static const routeName="DashBord";
   const DashBord({Key? key}) : super(key: key);
 
   @override
@@ -51,7 +51,7 @@ class DashBord extends StatelessWidget {
   Widget homeBody(BuildContext context,int index) {
     return SizedBox(
       height: double.maxFinite,
-        child: Provider.of<MenuProvider>(context).screens[index]);
+        child: Provider.of<MenuProvider>(context).screaens[index]);
   }
 
 

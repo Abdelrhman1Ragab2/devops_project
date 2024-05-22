@@ -21,52 +21,56 @@ class _AWSState extends State<AWS> {
         appBar: AppBar(
           title: const Text("AWS"),
           centerTitle: true,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return const AddUserDialog();
-                      });
-                },
-                icon: Icon(
-                  Icons.add,
-                )),
-            IconButton(
-                onPressed: () {
-                  setState(() {
-
-                  });
-                },
-                icon: Icon(
-                  Icons.refresh,
-                )),
-          ],
+          // actions: [
+          //   IconButton(
+          //       onPressed: () {
+          //         showDialog(
+          //             context: context,
+          //             builder: (context) {
+          //               return const AddUserDialog();
+          //             });
+          //       },
+          //       icon: Icon(
+          //         Icons.add,
+          //       )),
+          //   IconButton(
+          //       onPressed: () {
+          //         setState(() {
+          //
+          //         });
+          //       },
+          //       icon: Icon(
+          //         Icons.refresh,
+          //       )),
+          // ],
         ),
         body: buildBody(context));
   }
 
-  Widget buildBody(BuildContext context) {
-    print("i will build");
-    return FutureBuilder<List<User>>(
-      future: Provider.of<ApiProvider>(context, listen: false).getAllUsers(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          List<User> users = snapshot.data!;
-          if (users.isEmpty) {
-            return const Center(child: Text("no record "));
-          }
-          return allUserList(
-              users); // Assuming allUserList is a widget that renders the user list
-        } else if (snapshot.hasError) {
-          return const Center(child: Text("Error"));
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-      },
-    );
+  Widget buildBody(
+      BuildContext context) {
+    return const Center(child: Text("we will build this part later.."));
   }
+
+  // Widget buildBody(BuildContext context) {
+  //   return FutureBuilder<List<User>>(
+  //     future: Provider.of<ApiProvider>(context, listen: false).getAllUsers(),
+  //     builder: (context, snapshot) {
+  //       if (snapshot.hasData) {
+  //         List<User> users = snapshot.data!;
+  //         if (users.isEmpty) {
+  //           return const Center(child: Text("no record "));
+  //         }
+  //         return allUserList(
+  //             users); // Assuming allUserList is a widget that renders the user list
+  //       } else if (snapshot.hasError) {
+  //         return  Center(child: Text(snapshot.error.toString()));
+  //       } else {
+  //         return const Center(child: CircularProgressIndicator());
+  //       }
+  //     },
+  //   );
+  // }
 
   Widget allUserList(List<User> users) {
     return ListView.separated(

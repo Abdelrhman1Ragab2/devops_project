@@ -13,6 +13,7 @@ import '../view/home/docker/docker_page.dart';
 import '../view/home/linux/linux_page.dart';
 import '../view/home/python/python_page.dart';
 import '../view/home/services/services_page.dart';
+import '../view/home/users/users_page.dart';
 
 class MenuProvider with ChangeNotifier{
 
@@ -22,7 +23,7 @@ class MenuProvider with ChangeNotifier{
    notifyListeners();
   }
   List<MenuModel> menus=[
-    MenuModel(title: "About", image: "assets/images/team1.png"),
+    MenuModel(title: "Users", image: "assets/images/team1.png"),
     MenuModel(title: "Linux", image: "assets/images/linux.png",),
     MenuModel(title: "Jenkins", image: "assets/images/jenkins1.png",),
     MenuModel(title: "Python", image: "assets/images/python1.png",),
@@ -32,9 +33,10 @@ class MenuProvider with ChangeNotifier{
     MenuModel(title: "AWS", image: "assets/images/aws.png"),
     MenuModel(title: "Ansible", image: "assets/images/ansible.png"),
     MenuModel(title: "Terraform", image: "assets/images/terraform.png"),
+
   ];
 
-  List<Widget> screens=const[ AboutPage(),Linux(),Jenkins(),Python(),Docker(),Kubernetes(),Agile(),AWS(),Ansible(),Terraform()];
+  List<Widget> screaens=const[ /*AboutPage(),*/UsersPage(),Linux(),Jenkins(),Python(),Docker(),Kubernetes(),Agile(),AWS(),Ansible(),Terraform()];
 
 
 

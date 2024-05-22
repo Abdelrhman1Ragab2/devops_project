@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:network/model/users.dart';
 
 import '../model/user.dart';
 
@@ -76,4 +77,77 @@ class ApiProvider with ChangeNotifier {
       print('Failed to delete user. Status code: ${response.statusCode}');
 
     }
-  }}
+  }
+
+   Future<List<WebUser>> fetchUsers() async {
+    final response = await http.get(Uri.parse('http://backend-service:3000/users'),
+    headers: {
+        "Access-Control-Allow-Origin": "*"
+    }
+
+    );
+    if (response.statusCode == 200) {
+      List<dynamic> jsonData = jsonDecode(response.body);
+      List<WebUser> users=[];
+      for (var element in jsonData) {
+        users.add(WebUser.fromJson(element));
+
+      }
+      print(users[0].email);
+      return users;
+    } else {
+      throw Exception('Failed to fetch users');
+    }
+  }
+
+  Future<void> registerWebUsers(Map user) async {
+    print("the pass: ${user['password']} the email ${user['password']}");
+    try {
+      final response = await http.post(
+          Uri.parse('http://backend-service:3000/users'),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode(user)
+      );
+      print(response.statusCode);
+      print(response.body);
+      print(response.reasonPhrase);
+
+      if (response.statusCode == 200) {
+        print('User created: ${response.body}');
+      } else {
+        // Error creating user
+        print('Error creating user: ${response.body}');
+      }
+    }
+    catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<Map<String,dynamic>> loginUser(String email, String password) async {
+
+      List<WebUser> users= await fetchUsers();
+      Map<String,dynamic> output={};
+      for (var element in users) {
+        print("${element.email} ${element.password}");
+        if(element.email==email && element.password==password){
+          output.addAll({
+            "auth":true,
+          });
+        break;
+        }
+
+        else{
+          output.addAll({
+            "auth":false,
+          });
+        }
+      }
+      print(output);
+      return output;
+  }
+
+
+  
+  
+  }

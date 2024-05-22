@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'auth/dash.dart';
 import 'dashbord.dart';
 
 
@@ -30,12 +31,14 @@ class MyApp extends StatelessWidget {
             10, 18, 60, 0.9),
       ),
 
-      routes: const {
+      routes:  {
+        DashBord.routeName: (context) =>  const DashBord(),
 
 
       },
 
-      home: const DashBord(),
+      // home: const DashBord(),
+      home: const DashAuth(),
     );
   }
 }
